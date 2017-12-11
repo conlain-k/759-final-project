@@ -1,6 +1,6 @@
 # Warnings
 WFLAGS := -Wall -Wextra -Wno-sign-conversion -Wsign-compare
-RPATHFLAGS := -Wl,-rpath=/home/conlain/programs/759-final-project
+RPATHFLAGS := -Wl,-rpath=.
 TOBJFLAGS := -Ltinyobjloader -l tinyobjloader_double
 
 # Optimization and architecture
@@ -8,7 +8,7 @@ OPT  := -O3 -mavx -ftree-vectorize -msse2
 
 # Language standard
 CCSTD	:= -std=c99
-CXXSTD	:= -std=c++14
+CXXSTD	:= -std=c++11
 
 FLAGS	:=-fopenmp
 
@@ -21,9 +21,9 @@ EXEC := tester
 .DEFAULT_GOAL := all
 
 all : Makefile $(EXEC)
-tester: solver.cpp
+tester: solver.cpp tritri.c
 	@ echo Compiling $<...
-	 $(CXX) $(CXXSTD) $(WFLAGS) $(FLAGS) $(RPATHFLAGS) $(TOBJFLAGS) $(CXXFLAGS) $< -o $@
+	 $(CXX) $(CXXSTD) $(WFLAGS) $(FLAGS) $(RPATHFLAGS) $(TOBJFLAGS) $(CXXFLAGS) $^ -o $@
 	 cp tinyobjloader/libtinyobjloader_double.so.1 .
 
 .PHONY: clean
